@@ -1,0 +1,21 @@
+\documentclass{article}
+\usepackage{l3sys-query}
+\begin{document}
+
+\ExplSyntaxOn
+
+\sys_split_query:nnN {ls} {*} \l_tmpa_seq
+\seq_map_inline:Nn \l_tmpa_seq { #1 \par }
+
+\sys_split_query:nN {ls} \l_tmpb_seq
+\seq_map_inline:Nn \l_tmpb_seq { \texttt{#1} \par }
+
+\sys_get_query:nnN {ls} {*} \l_tmpa_tl
+\exp_args:NNe \tl_replace_all:Nnn \l_tmpa_tl { \char_generate:nn {13}{12} } {,}
+\exp_args:NNV \clist_set:Nn \l_tmpa_clist \l_tmpa_tl
+
+\clist_map_inline:Nn \l_tmpa_clist { \textbf{#1}\par }
+
+\ExplSyntaxOff
+
+\end{document}

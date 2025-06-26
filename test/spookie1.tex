@@ -1,0 +1,9 @@
+\documentclass{article}
+  \usepackage{shellesc}
+  \begin{document}
+This will write a file named helloworld.tex with the contents "Hello-World".
+\newwrite\outfile
+\openout\outfile=helloworld.tex
+\write\outfile{Hello-World}
+\closeout\outfile
+\end{document}

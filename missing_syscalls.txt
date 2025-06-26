@@ -1,0 +1,7 @@
+# limiting ls:
+
+opendir/closedir/readdir  - not used in ls
+
+strace ls shows:
+- newfstatat   
+- statx
