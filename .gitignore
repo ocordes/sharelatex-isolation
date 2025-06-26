@@ -50,3 +50,17 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# special files
+Makefile
+cmake_install.cmake
+CMakeFiles/
+CMakeCache.txt
+config.h
+test/*.pdf
+test/*.log
+test/*.stat
+test/*.aux
+test/*.fls
+test/*.fdb*
+test/helloworld.tex
