@@ -23,7 +23,7 @@ int main() {
     whitelist *wl;
     whitelist *bl;
 
-    wl = whitelist_from_string("/etc:/usr:.");
+    wl = whitelist_from_string("/etc:/usr:.:/bin/ls");
     if (!wl) {
         fprintf(stderr, "Failed to create whitelist\n");
         return 1;    }
@@ -40,6 +40,9 @@ int main() {
 
     test_whitelist(wl, "/etc/hallo");
     test_whitelist(wl, "/etC/hallo");
+    test_whitelist(wl, "/bin/ls");
+    test_whitelist(wl, "/bin/ls2");
+    test_whitelist(wl, "/usr/bin/ls");
 
     whitelist_destroy(wl);
     whitelist_destroy(bl);

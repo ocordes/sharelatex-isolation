@@ -1,16 +1,18 @@
 /* params.c
 
    written by: Oliver Cordes 2012-07-31
-   changed by: Oliver Cordes 2025-06-26
+   changed by: Oliver Cordes 2025-06-28
 
 
 */
+
 
 #include <stdlib.h>
 #include <stdio.h>
 
 #include <string.h>
 #include <unistd.h>
+#include <getopt.h>
 
 #include "parse.h"
 

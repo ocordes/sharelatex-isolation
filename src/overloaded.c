@@ -1,7 +1,7 @@
 /* overloaded.c
 
    written by: Oliver Cordes 2012-08-02
-   changed by: Oliver Cordes 2025-06-26
+   changed by: Oliver Cordes 2025-06-28
 
 */
 
@@ -17,6 +17,7 @@
 #include "logfile.h"
 #include "params.h"
 
+#include "whitelist.h"
 
 
 /* open/close/read/write overloading functions */ 

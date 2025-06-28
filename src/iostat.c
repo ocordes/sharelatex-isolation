@@ -1,7 +1,7 @@
 /* iostat.c
 
    written by: Oliver Cordes 2012-07-27
-   changed by: Oliver Cordes 2025-06-26
+   changed by: Oliver Cordes 2025-06-28
 
 */
 
@@ -11,16 +11,29 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <unistd.h>
-
+#include <fcntl.h>
+#include <linux/limits.h>
 
 #include "config.h"
 
 #include "file_stat.h"
+#include "isolation.h"
 #include "logfile.h"
 #include "params.h"
 
-
-
+int get_cmdline()
+{
+  ssize_t i, n;
+  char cmdline[ARG_MAX];
+  int cmdline_fd = open("/proc/self/cmdline", O_RDONLY);
+  n = read(cmdline_fd, cmdline, sizeof cmdline);
+  for (i = 0; i < n; ++i)
+    if (!cmdline[i])
+      cmdline[i] = ' ';
+  cmdline[n - 1] = '\n';
+  write(STDOUT_FILENO, cmdline, n);
+  return 0;
+}
 
 void copy_orig_function( void **func, char *funcname )
 {
@@ -40,8 +53,13 @@ void __detach(void) __attribute__((destructor));
 
 void __attach(void)
 {
-
   printf("LD_PRELOAD: sharelatex-isolation library (Version %s) loaded\n", VERSION);
+
+  // initialize the isolation library
+  // this must be done before the original functions are copied
+  isolation_init();
+
+  /* copy the original functions */
   copy_orig_function( (void*) &orig_open, "open" );
   copy_orig_function( (void*) &orig_close, "close" );
   copy_orig_function( (void*) &orig_read, "read" );
@@ -70,4 +88,5 @@ void __detach(void)
   file_stat_done();
   logfile_done(); 
   params_done(); 
+  isolation_done();
 }  
