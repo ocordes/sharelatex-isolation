@@ -10,3 +10,11 @@ Short information about the first tests:
   * opendir/closedir/readdir was the old style
   * stat is a the better approach
   * statat must be evaluated if it based in the end on stat, so one overload is sufficient
+
+
+
+How to use whitelists
+
+Whitelists for read and write cases can be defined as environment variables. All entries are 
+seperated with ":" or ",". The entries can be directories or individual filenames. This makes 
+the masking easier.

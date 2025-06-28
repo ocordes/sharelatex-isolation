@@ -4,7 +4,7 @@
  * It implements the whitelist functionality for the project.
  *
  * written by: Oliver Cordes 2025-06-27  
- * changed by: Oliver Cordes 2025-06-27
+ * changed by: Oliver Cordes 2025-06-28
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,9 +21,12 @@
 
 */
 
+#define _GNU_SOURCE
+#include <stdio.h>
+
 #include <stdlib.h>
 #include <string.h>
-#include <stdio.h>  
+#include <sys/stat.h>
 
 #include "whitelist.h"
 
@@ -105,9 +108,23 @@ void whitelist_show(whitelist *wl) {
     }
 }
 
+
+int is_directory(const char *path)
+{
+    struct stat path_stat;
+    if (stat(path, &path_stat) != 0)
+    {
+        return 0; // Path does not exist or error accessing it
+    }
+    return S_ISDIR(path_stat.st_mode);
+}
+
+
+// whitelist_from_string creates a whitelist from a string.
+// The string is expected to be a comma-/or semi-colon-separated list of names.
+// If the name does not end with '/', it appends a '/' if the name is a directory.
+// Otherwise, it uses the name as is as a file name.
 whitelist *whitelist_from_string(const char *str) {
-    // This function creates a whitelist from a string.
-    // The string is expected to be a comma-/or semi-colon-separated list of names.
     
     whitelist *wl = whitelist_create(10); // Create a new whitelist with initial capacity
     if (!wl) {
@@ -124,12 +141,18 @@ whitelist *whitelist_from_string(const char *str) {
     token = strtok(str_copy, ":,"); // Tokenize the string by semicolon and comma
     while (token != NULL) {
         if (token[strlen(token) - 1] == '/') {
-         asprintf(&ntoken, "%s", token); // If the token ends with '/', use it as is
+            asprintf(&ntoken, "%s", token); // If the token ends with '/', use it as is
         } else {
-         // If the token does not end with '/', append a '/' to it
-         asprintf(&ntoken, "%s/", token);
-        } 
-        asprintf(&ntoken, "%s/", token); // Create a new string for the token
+            // If the token does not end with '/', append a '/' to it
+            if (is_directory(token) == 0) {
+                // If the token is not a directory
+                asprintf(&ntoken, "%s", token);
+            } else {
+                // If the token is a directory, append a '/'
+                asprintf(&ntoken, "%s/", token);
+            } 
+        }
+    
         if (whitelist_add(wl, ntoken) != 0) {
             free(str_copy);
             free(ntoken); // Free the token string
@@ -154,7 +177,11 @@ int whitelist_check(whitelist *wl, const char *name) {
             free(dupname);
             continue;
         }
-        dupname[strlen(wl->items[i])] = '\0'; // Cut the string to the length of the whitelist item
+        // check if item is a directory
+        if (wl->items[i][strlen(wl->items[i]) - 1] == '/') {
+            dupname[strlen(wl->items[i])] = '\0'; // Cut the string to the length of the whitelist item
+        }
+        
         // Compare the name with the whitelist item
         printf("Test: (%s) %s == %s\n", name, dupname, wl->items[i]);
         
