@@ -1,0 +1,19 @@
+# Fdb version 3
+["pdflatex"] 1751294239 "spookie1.tex" "out/spookie1.pdf" "spookie1" 1751294240
+  "/etc/texmf/web2c/texmf.cnf" 1670599371 475 c0e671620eb5563b2130f56340a5fde8 ""
+  "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1248133631 35752 024fb6c41858982481f6968b5fc26508 ""
+  "/usr/share/texlive/texmf-dist/tex/latex/base/article.cls" 1636758526 20144 8a7de377ae7a11ee924a7499611f5a9d ""
+  "/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo" 1636758526 8448 96f18c76bf608a36ee6fbf021ac1dd32 ""
+  "/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def" 1642022539 29921 f0f4f870357ebfb8fe58ed9ed4ee9b92 ""
+  "/usr/share/texlive/texmf-dist/tex/latex/tools/shellesc.sty" 1622581934 4118 0f286eca74ee36b7743ff20320e5479f ""
+  "/usr/share/texlive/texmf-dist/web2c/texmf.cnf" 1644012257 39432 7155514e09a3d69036fac785183a21c2 ""
+  "/usr/share/texmf/web2c/texmf.cnf" 1644012257 39432 7155514e09a3d69036fac785183a21c2 ""
+  "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1670773848 4194257 131dc4fc5be880dc4512f1abec6b8a7f ""
+  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1711085639 2799378 98319679835ee3b89800d07d64207970 ""
+  "out/spookie1.aux" 1751294240 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
+  "spookie1.tex" 1751293138 255 e7a6256569b9084d529a1bc544c375ab ""
+  (generated)
+  "out/helloworld.tex"
+  "out/spookie1.aux"
+  "out/spookie1.log"
+  "out/spookie1.pdf"

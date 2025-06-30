@@ -4,7 +4,7 @@
  * It implements the whitelist functionality for the project.
  *
  * written by: Oliver Cordes 2025-06-27  
- * changed by: Oliver Cordes 2025-06-28
+ * changed by: Oliver Cordes 2025-06-30
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,6 +29,7 @@
 #include <sys/stat.h>
 
 #include "whitelist.h"
+
 
 whitelist* whitelist_create(int initial_capacity)
 {
@@ -126,6 +127,8 @@ int is_directory(const char *path)
 // Otherwise, it uses the name as is as a file name.
 whitelist *whitelist_from_string(const char *str) {
     
+    char *sdir = NULL; // Variable to hold the real path of the directory
+
     whitelist *wl = whitelist_create(10); // Create a new whitelist with initial capacity
     if (!wl) {
         return NULL; // Memory allocation failed
@@ -149,7 +152,9 @@ whitelist *whitelist_from_string(const char *str) {
                 asprintf(&ntoken, "%s", token);
             } else {
                 // If the token is a directory, append a '/'
-                asprintf(&ntoken, "%s/", token);
+                sdir = realpath(token, NULL);
+                asprintf(&ntoken, "%s/", sdir);
+                free(sdir); // Free the realpath result
             } 
         }
     
@@ -183,11 +188,11 @@ int whitelist_check(whitelist *wl, const char *name) {
         }
         
         // Compare the name with the whitelist item
-        printf("Test: (%s) %s == %s\n", name, dupname, wl->items[i]);
-        
-        if (strcmp(wl->items[i], dupname) == 0) {
+        if (strcmp(wl->items[i], dupname) == 0)
             return 1; // Name found in the whitelist
-        }
+        
+
+        // Free the duplicated name after use
         free(dupname); // Free the duplicated name
     }
     return 0; // Placeholder implementation, always returns 0 (not whitelisted).
