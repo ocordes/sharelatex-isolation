@@ -1,7 +1,7 @@
 /* overloaded.c
 
    written by: Oliver Cordes 2012-08-02
-   changed by: Oliver Cordes 2025-06-28
+   changed by: Oliver Cordes 2025-06-30
 
 */
 
@@ -9,36 +9,160 @@
 #include <dlfcn.h>
 #include <stdio.h>
 #include <stdarg.h>
+#include <limits.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include <sys/types.h>
+#include <fcntl.h>
 #include <dirent.h>
+#include <libgen.h>
+#include <string.h>
+#include <errno.h>
 
 #include "file_stat.h"
 #include "logfile.h"
 #include "params.h"
 
+#include "isolation.h"
 #include "whitelist.h"
 
 
-/* open/close/read/write overloading functions */ 
+int is_flag_readable( int flag )
+{
+  return ( ((flag & O_RDONLY) == O_RDONLY) || ((flag & O_RDWR) == O_RDWR));
+}
 
-int open ( const char *filename, int flag, ...)
+
+int is_flag_writable( int flag )
+{
+  return (((flag & O_WRONLY) == O_WRONLY) || ((flag & O_RDWR) == O_RDWR));
+} 
+
+
+int allowed_to_read( const char *filename )
+{
+  if ( read_whitelist == NULL ) {
+    logfile_write( "read_whitelist is NULL, allowing all read access" );
+    return 1; // no whitelist, so allow everything
+  }
+
+  if ( whitelist_check( read_whitelist, filename ) )
+  {
+    logfile_write( "read access to '%s' is granted", filename );   
+    return 1;
+  }
+
+  logfile_write( "read access to '%s' is denied", filename );
+  return 0;
+}
+
+
+int allowed_to_write( const char *filename )
+{
+  if ( write_whitelist == NULL )
+    return 1; // no whitelist, so allow everything
+
+  if ( whitelist_check( write_whitelist, filename ) )
+  {
+    logfile_write( "write access to '%s' is granted", filename ); 
+    return 1;
+  }
+
+  logfile_write( "write access to '%s' is denied", filename );
+  return 0;
+}
+
+
+int check_granted( const char *filename, int flag )
+{
+  char *dirc;
+  char *basec;
+  char *dirfilename;
+  char *basefilename;
+  char *realpathname;
+  char *realfilename;
+
+  int  granted = 0;
+
+
+  // check if the filename is NULL
+  if ( filename == NULL )
+  {
+    logfile_write( "check_granted: filename is NULL, access denied" );
+    return 0; // access denied
+  }
+  
+  dirc = strdup(filename);
+  basec = strdup(filename);
+
+  dirfilename = dirname(dirc);
+  basefilename = basename(basec);
+
+  // dirfilename must be a real directory
+  realpathname = realpath(dirfilename, NULL);
+    
+
+  asprintf(&realfilename, "%s/%s", realpathname, basefilename);
+  free(dirc);
+  free(basec);
+  logfile_write( "check_granted: checking access for '%s' (realpath='%s')", filename, realfilename );
+
+
+  if ( is_flag_readable( flag ) )
+  {
+    if (allowed_to_read(realfilename))
+    {
+      granted = 1; // if read access is allowed, we grant the access
+    }
+  }
+
+  if ( granted && is_flag_writable(flag))
+  {
+    if (!allowed_to_write(realfilename))
+      granted = 0; // if write access is not allowed, we deny the access
+  }
+
+  // free realfilename after usage
+  free(realfilename);
+
+  return granted;
+}
+
+
+int fcheck_granted(const char *filename, const char *mode)
+{
+  return 1;
+}
+
+
+/* open/close/read/write overloading functions */
+
+int open(const char *filename, int flag, ...)
 {
   va_list ap;
-  int     res;
-  void   *arg;
+  int res;
+  void *arg;
 
-  va_start( ap, flag );
+  va_start(ap, flag);
   arg = va_arg(ap, void *);
-  va_end( ap );
+  va_end(ap);
 
   /* do some sanity checks */
-  if ( orig_open == NULL )
-    {
-      printf( "Preinit function open called!\n" );
-      orig_open = dlsym( RTLD_NEXT, "open" );
-      return orig_open( filename, flag, arg );
-    }
+  if (orig_open == NULL)
+  {
+    printf( "Preinit function open called!\n" );
+    orig_open = dlsym( RTLD_NEXT, "open" );
+    return orig_open( filename, flag, arg );
+  }
+
+  if ( !check_granted( filename, flag ) )
+  {
+    logfile_write( "open: access to '%s' denied", filename );
+    errno = EACCES; // set errno to access denied
+    return -1; // access denied
+  } else {
+    logfile_write( "open: access to '%s' granted", filename );
+  } 
 
   res = orig_open( filename, flag, arg );
 
@@ -113,11 +237,23 @@ int open64( const char *filename, int flag, ...)
 
   /* do some sanity checks */
   if ( orig_open64 == NULL )
-    {
-      printf( "Preinit function open64 called!\n" );
-      orig_open64 = dlsym( RTLD_NEXT, "open64" );
-      return orig_open64( filename, flag, ap );
-    }
+  {
+    printf( "Preinit function open64 called!\n" );
+    orig_open64 = dlsym( RTLD_NEXT, "open64" );
+    return orig_open64( filename, flag, ap );
+  }
+
+
+  if (!check_granted(filename, flag))
+  {
+    logfile_write("open: access to '%s' denied", filename);
+    errno = EACCES; // set errno to access denied
+    return -1;      // access denied
+  }
+  else
+  {
+    logfile_write("open: access to '%s' granted", filename);
+  }
 
   res = orig_open64( filename, flag, ap );
 
@@ -145,6 +281,17 @@ FILE *fopen ( const char *filename,
       printf( "Preinit function fopen called (filename=%s)!\n", filename );
       orig_fopen = dlsym( RTLD_NEXT, "fopen" );
       return orig_fopen( filename, mode );
+    }
+
+    if (!fcheck_granted(filename, mode))
+    {
+      logfile_write("open: access to '%s' denied", filename);
+      //errno = EACCES; // set errno to access denied
+      //return -1;      // access denied
+    }
+    else
+    {
+      logfile_write("open: access to '%s' granted", filename);
     }
 
   file = orig_fopen( filename, mode );

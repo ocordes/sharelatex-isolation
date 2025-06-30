@@ -16,6 +16,7 @@ configure_file(src/config.h.in ${PROJECT_BINARY_DIR}/config.h)
 # build directory in your include path.
 # This is done by the following line:
 include_directories(${PROJECT_BINARY_DIR})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/whitelist)
 
 
