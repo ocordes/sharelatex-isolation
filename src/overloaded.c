@@ -131,7 +131,39 @@ int check_granted( const char *filename, int flag )
 
 int fcheck_granted(const char *filename, const char *mode)
 {
-  return 1;
+  int mode_read = 0;
+  int mode_write = 0;
+  int flag;
+
+  mode_read = (strchr(mode, 'r') != NULL) || (strchr(mode, 'R') != NULL);
+  mode_write = (strchr(mode, 'w') != NULL) || (strchr(mode, 'W') != NULL) ||
+               (strchr(mode, 'a') != NULL) || (strchr(mode, 'A') != NULL);
+
+  if (mode_read)
+  {
+    if (mode_write)
+    {
+      flag = O_RDWR; // read and write
+    }
+    else
+    {
+      flag = O_RDONLY; // read only
+    }
+  } else {
+    if (mode_write)
+    {
+      flag = O_WRONLY; // write only
+    }
+    else
+    {
+      logfile_write( "fcheck_granted: no read or write access requested, access granted" );
+      return 1; // no read or write access requested, so we grant the access
+    } 
+  }
+
+  logfile_write( "fcheck_granted: checking access for '%s' with mode '%s' (flag=%i)", filename, mode, flag ); 
+
+  return check_granted( filename, flag );
 }
 
 
@@ -175,7 +207,7 @@ int open(const char *filename, int flag, ...)
 
 
 
-int close( int fd )
+int _close( int fd )
 {
   int res;
 
@@ -194,7 +226,7 @@ int close( int fd )
 }
 
 
-ssize_t read(int fd, void *buf, size_t count)
+ssize_t _read(int fd, void *buf, size_t count)
 {
   ssize_t res;
 
@@ -207,7 +239,7 @@ ssize_t read(int fd, void *buf, size_t count)
 }
 
 
-ssize_t write(int fd, const void *buf, size_t count)
+ssize_t _write(int fd, const void *buf, size_t count)
 {
   ssize_t res;
 
@@ -285,13 +317,13 @@ FILE *fopen ( const char *filename,
 
     if (!fcheck_granted(filename, mode))
     {
-      logfile_write("open: access to '%s' denied", filename);
-      //errno = EACCES; // set errno to access denied
-      //return -1;      // access denied
+      logfile_write("fopen: access to '%s' denied", filename);
+      errno = EACCES; // set errno to access denied
+      return NULL;      // access denied
     }
     else
     {
-      logfile_write("open: access to '%s' granted", filename);
+      logfile_write("fopen: access to '%s' granted", filename);
     }
 
   file = orig_fopen( filename, mode );
@@ -309,7 +341,7 @@ FILE *fopen ( const char *filename,
 }
 
 
-int fclose( FILE *file )
+int _fclose( FILE *file )
 {
   int res;
 
@@ -336,7 +368,7 @@ int fclose( FILE *file )
 
 
 
-size_t fread(void *ptr, size_t size, size_t nmemb, FILE *stream)
+size_t _fread(void *ptr, size_t size, size_t nmemb, FILE *stream)
 {
   size_t res;
   
@@ -348,7 +380,7 @@ size_t fread(void *ptr, size_t size, size_t nmemb, FILE *stream)
 }
 
 
-size_t fwrite(const void *ptr, size_t size, size_t nmemb, FILE *stream)
+size_t _fwrite(const void *ptr, size_t size, size_t nmemb, FILE *stream)
 {
   size_t res;
 
@@ -394,7 +426,7 @@ FILE *fopen64 (const char *filename,
 
 /* opendir/closedir/readdir */
 
-DIR *opendir(const char *name)
+DIR *_opendir(const char *name)
 {
   DIR *dir;
 
