@@ -5,7 +5,7 @@
  * It implements the isolation functionality for the project.
  * 
  * written by: Oliver Cordes 2025-06-28 
- * changed by: Oliver Cordes 2025-06-28
+ * changed by: Oliver Cordes 2025-07-02
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-export IOSTAT_PARAM="-s test3ls.stat -v -l test3ls.log"
+export IOSTAT_PARAM="-v -l test3ls.log"
 
 echo $IOSTAT_PARAM
 
