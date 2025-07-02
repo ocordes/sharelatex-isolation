@@ -1,7 +1,7 @@
 /* overloaded.c
 
    written by: Oliver Cordes 2012-08-02
-   changed by: Oliver Cordes 2025-06-30
+   changed by: Oliver Cordes 2025-07-02
 
 */
 
@@ -203,55 +203,11 @@ int open(const char *filename, int flag, ...)
   logfile_write( "open: filename='%s' mode=%i (%s) fd=%i", 
 		 filename, flag, fstat_flag_str( flag ), res );
 
-  file_stat_open( filename, res );
   return( res );
 } 
 
 
 
-int _close( int fd )
-{
-  int res;
-
-  /* do some sanity checks */
-  if ( orig_close == NULL )
-    {
-      printf( "Preinit function close called!\n" );
-      orig_open = dlsym( RTLD_NEXT, "close" );
-      return orig_close( fd );
-    }
-
-  res = orig_close( fd );
-  logfile_write( "close: fd=%i result=%i", fd, res );
-  file_stat_close( fd );
-  return res;
-}
-
-
-ssize_t _read(int fd, void *buf, size_t count)
-{
-  ssize_t res;
-
-  res = orig_read( fd, buf, count );
-  
-  logfile_write( "read: fd=%i req=%i read=%i", fd, count, res ); 
-  file_stat_read( fd, res );
-
-  return res;
-}
-
-
-ssize_t _write(int fd, const void *buf, size_t count)
-{
-  ssize_t res;
-
-  res = orig_write( fd, buf, count );
-
-  logfile_write( "write: fd=%i req=%i read=%i", fd, count, res ); 
-  file_stat_write( fd, res );
-
-  return res;
-}
 
 
 
@@ -300,7 +256,6 @@ int open64( const char *filename, int flag, ...)
   logfile_write( "open64: filename='%s' mode=%i (%s) fd=%i", 
 		 filename, flag, fstat_flag_str( flag ), res );
 
-  file_stat_open64( filename, res );
 
   return( res );
 }
@@ -338,7 +293,6 @@ FILE *fopen ( const char *filename,
   if ( file != NULL )
     {
       logfile_write( "fopen: filename='%s' mode='%s' result=OK", filename, mode );
-      file_stat_fopen( filename, file );
     }
   else
     {
@@ -349,55 +303,6 @@ FILE *fopen ( const char *filename,
 }
 
 
-int _fclose( FILE *file )
-{
-  int res;
-
-  char *s;
-
-  /* do some sanity checks */
-  if ( orig_fclose == NULL )
-    {
-      printf( "Preinit function fclose called!\n" );
-      orig_fclose = dlsym( RTLD_NEXT, "fclose" );
-      return orig_fclose( file );
-    }
-
-  res = orig_fclose( file );
-  s = fstat_filename_file( file );
-  if ( s == NULL )
-    logfile_write( "fclose: result=%i filename='NULL'", res );
-  else
-    logfile_write( "fclose: result=%i filename='%s'", res, s  );
-  file_stat_fclose( file );
-
-  return res;
-}
-
-
-
-size_t _fread(void *ptr, size_t size, size_t nmemb, FILE *stream)
-{
-  size_t res;
-  
-  res = orig_fread( ptr, size, nmemb, stream );
-  logfile_write( "fread: req=%i read=%i", (size*nmemb), res ); 
-  file_stat_fread( stream, res );
-
-  return res;
-}
-
-
-size_t _fwrite(const void *ptr, size_t size, size_t nmemb, FILE *stream)
-{
-  size_t res;
-
-  res = orig_fwrite( ptr, size, nmemb, stream );
-  logfile_write( "fwrite: req=%i write=%i", (size*nmemb), res ); 
-  file_stat_fwrite( stream, res );
-
-  return res;
-}
 
 
 /* fopen64 overloading functions */
@@ -419,7 +324,6 @@ FILE *fopen64 (const char *filename,
   if ( file != NULL )
     {
       logfile_write( "fopen64: filename='%s' mode='%s' result=OK", filename, mode );
-      file_stat_fopen64( filename, file );
     }
   else
     {

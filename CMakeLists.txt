@@ -5,7 +5,7 @@ project(sharelatex-isolation VERSION 0.0.1 DESCRIPTION "sharelatex-isolation lib
 
 set(VERSION 0.0.1)
 
-file(GLOB_RECURSE sources src/*.c src/*.h whitelist/whitelist.c whitelist/whitelist.h)
+file(GLOB_RECURSE sources src/*.c src/*.h)
 
 configure_file(src/config.h.in ${PROJECT_BINARY_DIR}/config.h)
 # Now make sure that you the the build directory on your "Include" path when compiling
@@ -17,7 +17,7 @@ configure_file(src/config.h.in ${PROJECT_BINARY_DIR}/config.h)
 # This is done by the following line:
 include_directories(${PROJECT_BINARY_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/whitelist)
+#include_directories(${CMAKE_CURRENT_SOURCE_DIR}/whitelist)
 
 
 add_library(shareiso SHARED ${sources})

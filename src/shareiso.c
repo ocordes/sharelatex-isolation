@@ -1,7 +1,7 @@
 /* shareiso.c
 
    written by: Oliver Cordes 2025-06-28
-   changed by: Oliver Cordes 2025-06-30
+   changed by: Oliver Cordes 2025-07-02
 
 */
 
@@ -62,20 +62,11 @@ void __attach(void)
 
   /* copy the original functions */
   copy_orig_function((void*) &orig_open, "open");
-  copy_orig_function((void*) &orig_close, "close");
-  copy_orig_function((void*) &orig_read, "read");
-  copy_orig_function((void*) &orig_write, "write");
-
   copy_orig_function((void*) &orig_open64, "open64");
 
   copy_orig_function((void*) &orig_fopen, "fopen");
-  copy_orig_function((void*) &orig_fclose, "fclose");
-  copy_orig_function((void*) &orig_fread, "fread");
-  copy_orig_function((void*) &orig_fwrite, "fwrite");
-
   copy_orig_function((void*) &orig_fopen64, "fopen64");
-
-
+  
   copy_orig_function( (void*) &orig_opendir, "opendir");
 
   // read the original command line of the attached process
@@ -90,12 +81,10 @@ void __attach(void)
 
   params_init();  
   logfile_init(); 
-  file_stat_init(); 
 }
 
 void __detach(void)
 {
-  file_stat_done();
   logfile_done(); 
   params_done(); 
   isolation_done();

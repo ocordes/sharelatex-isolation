@@ -64,3 +64,4 @@ test/*.aux
 test/*.fls
 test/*.fdb*
 test/helloworld.tex
+test/out/

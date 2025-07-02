@@ -1,7 +1,7 @@
 /* params.h
 
    written by: Oliver Cordes 2012-07-31
-   changed by: Oliver Cordes 2012-08-02
+   changed by: Oliver Cordes 2025-07-02
 
 
 */
@@ -12,7 +12,6 @@
 
 extern char *iostat_logging_name;
 extern int   iostat_trunc_logfile;
-extern char *iostat_statistics_name;
 extern int   iostat_statistics_append;
 
 extern int   iostat_closing_statistics;

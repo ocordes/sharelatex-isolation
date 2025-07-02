@@ -1,9 +1,8 @@
 /* logfile.c
 
    written: Oliver Cordes 2012-08-01
-   updated: Oliver Cordes 2012-08-02
+   updated: Oliver Cordes 2025-07-02
 
-   $Id: logfile.c 136 2010-05-22 14:49:55Z ocordes $
 
 */
 
@@ -30,7 +29,7 @@ char last_timestamp[50];
 
 void logfile_printf( FILE *file, char *s )
 {
-  orig_fwrite( s, strlen( s ), 1, file );
+  fwrite( s, strlen( s ), 1, file );
 }
 
 
@@ -87,7 +86,7 @@ void logfile_done ( void )
       logfile_printf( file,
 	       "\n-------------------------------------------------------------------------------\n"
 	       ); 
-      orig_fclose( file ); 
+      fclose( file ); 
       } 
 }
 
