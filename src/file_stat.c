@@ -1,10 +1,12 @@
 /* file_stat.c
 
    written by: Oliver Cordes 2012-07-27
-   changed by: Oliver Cordes 2025-06-26
+   changed by: Oliver Cordes 2025-07-02
 
 
 */
+
+#define _GNU_SOURCE
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -54,7 +56,8 @@ int     (*orig_fclose)   ( FILE *file )                                         
 size_t  (*orig_fread)    (void *ptr, size_t size, size_t nmemb, FILE *stream)       = NULL;
 size_t  (*orig_fwrite)   (const void *ptr, size_t size, size_t nmemb, FILE *stream) = NULL;
 
-int     (*orig_open64)   (const char *filename, int flag, ...)                      = NULL;
+//int     (*orig_open64)   (const char *filename, int flag, ...)                      = NULL;
+int     (*orig_open64)   (const char *filename, int flag, mode_t mode)              = NULL;
 FILE*   (*orig_fopen64)  (const char *filename, const char *mode)                   = NULL;
 
 DIR*    (*orig_opendir)  (const char *name)                                         = NULL;
@@ -591,11 +594,11 @@ char *fstat_flag_str( int flag )
       append_flag( aflags, "O_EXCL" );
       flag &= ~O_EXCL;
     }
-  /*if ( ( flag & O_LARGEFILE ) == O_LARGEFILE )
+  if ( ( flag & O_LARGEFILE ) == O_LARGEFILE )
     {
       append_flag( aflags, "O_LARGEFILE" );
       flag &= ~O_LARGEFILE;
-      } */
+      }
   /*if ( ( flag & O_NOATIME ) == O_NOATIME )
     {
       append_flag( aflags, "O_NOATIME" );

@@ -36,11 +36,11 @@ void isolation_init(void) {
         read_whitelist = whitelist_from_string(e);
     }
     else {
-        printf("Environment variable '%s' not set. Using default read whitelist: '/etc:/usr:..'\n", ENV_READ_WHITELIST);
+        fprintf(stderr, "Environment variable '%s' not set. Using default read whitelist: '/etc:/usr:..'\n", ENV_READ_WHITELIST);
         read_whitelist = whitelist_from_string("/etc:/usr:.");
     }
     if (!read_whitelist) {
-        printf("Misconfiguration or missing environment variable '%s'!\n", ENV_READ_WHITELIST);
+        fprintf(stderr, "Misconfiguration or missing environment variable '%s'!\n", ENV_READ_WHITELIST);
     }    
     
     e = getenv(ENV_WRITE_WHITELIST);
@@ -48,19 +48,19 @@ void isolation_init(void) {
         write_whitelist = whitelist_from_string(e);
     }
     else {
-        printf("Environment variable '%s' not set. Using default write whitelist: '.'\n", ENV_WRITE_WHITELIST);
+        fprintf(stderr, "Environment variable '%s' not set. Using default write whitelist: '.'\n", ENV_WRITE_WHITELIST);
         // Default write whitelist is the current directory, which is usually safe for writing.
         write_whitelist = whitelist_from_string(".");
     }
     if (!write_whitelist) {
-        printf("Misconfiguration or missing environment variable '%s'!\n", ENV_WRITE_WHITELIST);
+        fprintf(stderr, "Misconfiguration or missing environment variable '%s'!\n", ENV_WRITE_WHITELIST);
     }
 
-    printf("Isolation library initialized.\n");
+    fprintf(stderr, "Isolation library initialized.\n");
 }
 
 void isolation_done(void) {
     // Cleanup the isolation library
-    printf("Isolation library cleaned up.\n");
+    fprintf(stderr, "Isolation library cleaned up.\n");
 }
 

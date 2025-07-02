@@ -52,7 +52,8 @@ extern int     (*orig_fclose)   ( FILE *file );
 extern size_t  (*orig_fread)    (void *ptr, size_t size, size_t nmemb, FILE *stream);
 extern size_t  (*orig_fwrite)   (const void *ptr, size_t size, size_t nmemb, FILE *stream);
 
-extern int     (*orig_open64)   (const char *filename, int flag, ...);
+//extern int     (*orig_open64)   (const char *filename, int flag, ...);
+extern int (*orig_open64)(const char *filename, int flag, mode_t mode);
 extern FILE*   (*orig_fopen64)  (const char *filename, const char *mode);
 
 extern DIR*    (*orig_opendir)  (const char *name);

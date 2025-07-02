@@ -81,7 +81,7 @@ void __attach(void)
   // read the original command line of the attached process
   s = get_cmdline();
 
-  printf("LD_PRELOAD: sharelatex-isolation library (Version %s) for '%s' loaded\n", VERSION, s);
+  fprintf(stderr, "LD_PRELOAD: sharelatex-isolation library (Version %s) for '%s' loaded\n", VERSION, s);
   free(s);
 
   // initialize the isolation library
