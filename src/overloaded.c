@@ -12,7 +12,9 @@
 #include <limits.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <stdbool.h>
 #include <sys/types.h>
+#include <sys/stat.h>
 #include <fcntl.h>
 #include <dirent.h>
 #include <libgen.h>
@@ -260,10 +262,12 @@ int open64( const char *filename, int flag, ...)
 {
   va_list ap;
   int     res;
-  void   *arg;
+  int     arg;
 
+  
+  /* copy the extra argument */
   va_start( ap, flag );
-  arg = va_arg(ap, void *);
+  arg = va_arg(ap, int);
   va_end( ap );
 
 
@@ -272,24 +276,28 @@ int open64( const char *filename, int flag, ...)
   {
     printf( "Preinit function open64 called!\n" );
     orig_open64 = dlsym( RTLD_NEXT, "open64" );
-    return orig_open64( filename, flag, ap );
+    //return orig_open64( filename, flag, aq );
+    return orig_open64(filename, flag, (mode_t)arg);
   }
 
 
+  logfile_write( "open64: checking access for '%s' with flag=%i mode=%o", filename, 
+     flag, arg);
+     
   if (!check_granted(filename, flag))
   {
-    logfile_write("open: access to '%s' denied", filename);
+    logfile_write("open64: access to '%s' denied", filename);
     errno = EACCES; // set errno to access denied
     return -1;      // access denied
   }
   else
   {
-    logfile_write("open: access to '%s' granted", filename);
+    logfile_write("open64: access to '%s' granted", filename);
   }
 
-  res = orig_open64( filename, flag, ap );
+  res = orig_open64( filename, flag, (mode_t)arg);  
 
-  logfile_write( "open: filename='%s' mode=%i (%s) fd=%i", 
+  logfile_write( "open64: filename='%s' mode=%i (%s) fd=%i", 
 		 filename, flag, fstat_flag_str( flag ), res );
 
   file_stat_open64( filename, res );
