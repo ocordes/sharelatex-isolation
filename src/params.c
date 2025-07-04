@@ -1,7 +1,7 @@
 /* params.c
 
    written by: Oliver Cordes 2012-07-31
-   changed by: Oliver Cordes 2025-07-02
+   changed by: Oliver Cordes 2025-07-04
 
 
 */
@@ -18,53 +18,44 @@
 
 
 
-#define environment_name "IOSTAT_PARAM"
+#define environment_name "SHAREISO_PARAM"
 
 
-char *iostat_logging_name       = NULL;
-int   iostat_trunc_logfile      = 0;
-int   iostat_statistics_append  = 0;
-int   iostat_closing_statistics = 0;
-
-int   iostat_verbose            = 0;
+char *shareiso_logging_name       = NULL;
+int   shareiso_trunc_logfile      = 0;
+int   shareiso_dry_run            = 0;
 
 
 
 
-void params_init( void )
+void params_init(void)
 {
-  char   *e, *s;
-  int    nargc;
-  char **nargv;
-  int    opt;
-  int   i;
+	char   *e, *s;
+  	int    nargc;
+  	char **nargv;
+  	int    opt;
+  	int   i;
 
-  e = getenv( environment_name );
+  	e = getenv(environment_name);
   
-  if ( e != NULL )
-    {
+  	if (e != NULL)
+	{
 		// save the environment variable
 	  	
 		s = strdup(e);
-      	parseCommandLine( s, &nargv, &nargc );
+      	parseCommandLine(s, &nargv, &nargc);
 
-      	while ( ( opt = getopt( nargc, nargv, "acl:tv" ) ) != -1 ) 
+      	while ((opt = getopt(nargc, nargv, "l:nt")) != -1) 
 		{
-	  		switch( opt )
+	  		switch(opt)
 	    	{
-	    		case 'a':
-	      			iostat_statistics_append = 1;
-	      			break;
-	    		case 'c':
-	      			iostat_closing_statistics = 1;
-	      			break;
 	    		case 'l':
-	      			iostat_logging_name = strdup( optarg );
+	      			shareiso_logging_name = strdup(optarg);
 	      			break;
 	    		case 't':
-	      			iostat_trunc_logfile = 1;
-	    		case 'v':
-	      			iostat_verbose = 1;
+	      			shareiso_trunc_logfile = 1;
+	    		case 'n':
+	      			shareiso_dry_run = 1;
 	      		break;
 	    	}
 		}
@@ -77,8 +68,8 @@ void params_init( void )
 
 
 
-void params_done( void )
+void params_done(void)
 {
-  if ( iostat_logging_name != NULL )
-    free( iostat_logging_name );
+	if (shareiso_logging_name != NULL)
+		free(shareiso_logging_name);
 }

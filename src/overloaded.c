@@ -1,7 +1,7 @@
 /* overloaded.c
 
    written by: Oliver Cordes 2012-08-02
-   changed by: Oliver Cordes 2025-07-02
+   changed by: Oliver Cordes 2025-07-04
 
 */
 
@@ -169,156 +169,162 @@ int fcheck_granted(const char *filename, const char *mode)
 }
 
 
-/* open/close/read/write overloading functions */
+/* the new open function */
 
 int open(const char *filename, int flag, ...)
 {
   va_list ap;
   int res;
-  void *arg;
+  int arg;
 
   va_start(ap, flag);
-  arg = va_arg(ap, void *);
+  arg = va_arg(ap, int);
   va_end(ap);
 
   /* do some sanity checks */
   if (orig_open == NULL)
   {
-    printf( "Preinit function open called!\n" );
-    orig_open = dlsym( RTLD_NEXT, "open" );
-    return orig_open( filename, flag, arg );
+    printf("Preinit function open called!\n");
+    orig_open = dlsym(RTLD_NEXT, "open");
+    return orig_open(filename, flag, arg);
   }
 
-  if ( !check_granted( filename, flag ) )
+  if ( !check_granted(filename, flag))
   {
-    logfile_write( "open: access to '%s' denied", filename );
-    errno = EACCES; // set errno to access denied
-    return -1; // access denied
-  } else {
-    logfile_write( "open: access to '%s' granted", filename );
+    if (shareiso_dry_run)
+    {
+      logfile_write("open: dry run, access to '%s' denied", filename);      
+    }
+    else
+    {
+      logfile_write("open: access to '%s' denied", filename);
+    
+      errno = EACCES; // set errno to access denied
+      return -1; // access denied
+    }
+  } 
+  else 
+  {
+    logfile_write("open: access to '%s' granted", filename);
   } 
 
-  res = orig_open( filename, flag, arg );
+  res = orig_open(filename, flag, arg);
 
-  logfile_write( "open: filename='%s' mode=%i (%s) fd=%i", 
-		 filename, flag, fstat_flag_str( flag ), res );
+  logfile_write("open: filename='%s' mode=%i (%s) fd=%i", 
+		 filename, flag, fstat_flag_str(flag), res);
 
-  return( res );
+  return res;
 } 
 
 
+/* the new open64 function */
 
-
-
-
-/* open64/close64/read64/write64 overloading functions */
-
-
-int open64( const char *filename, int flag, ...)
+int open64(const char *filename, int flag, ...)
 {
   va_list ap;
   int     res;
   int     arg;
 
-  
+
   /* copy the extra argument */
-  va_start( ap, flag );
+  va_start(ap, flag);
   arg = va_arg(ap, int);
-  va_end( ap );
+  va_end(ap);
 
 
   /* do some sanity checks */
-  if ( orig_open64 == NULL )
+  if (orig_open64 == NULL)
   {
-    printf( "Preinit function open64 called!\n" );
-    orig_open64 = dlsym( RTLD_NEXT, "open64" );
-    //return orig_open64( filename, flag, aq );
+    printf("Preinit function open64 called!\n");
+    orig_open64 = dlsym(RTLD_NEXT, "open64");
     return orig_open64(filename, flag, (mode_t)arg);
   }
 
 
-  logfile_write( "open64: checking access for '%s' with flag=%i mode=%o", filename, 
+  logfile_write("open64: checking access for '%s' with flag=%i mode=%o", filename, 
      flag, arg);
      
   if (!check_granted(filename, flag))
   {
-    logfile_write("open64: access to '%s' denied", filename);
-    errno = EACCES; // set errno to access denied
-    return -1;      // access denied
+    if (shareiso_dry_run)
+    {
+      logfile_write("open64: dry run, access to '%s' denied", filename);
+    }
+    else
+    {
+      // if we are not in dry run mode, we deny the access
+      logfile_write("open64: access to '%s' denied", filename);
+      errno = EACCES; // set errno to access denied
+      return -1;      // access denied
+    }
   }
   else
   {
     logfile_write("open64: access to '%s' granted", filename);
   }
 
-  res = orig_open64( filename, flag, (mode_t)arg);  
+  res = orig_open64(filename, flag, (mode_t)arg);  
 
-  logfile_write( "open64: filename='%s' mode=%i (%s) fd=%i", 
-		 filename, flag, fstat_flag_str( flag ), res );
+  logfile_write("open64: filename='%s' mode=%i (%s) fd=%i", 
+		 filename, flag, fstat_flag_str(flag), res);
 
 
-  return( res );
+  return res;
 }
 
 
+/* the new fopen function */
 
-
-/* fopen/fclose/fread/fwrite overloading functions */
-
-FILE *fopen ( const char *filename,
-	      const char *mode) 
+FILE *fopen(const char *filename, const char *mode) 
 {
   FILE *file;
 
   /* do some sanity checks */
-  if ( orig_fopen == NULL )
-    {
-      printf( "Preinit function fopen called (filename=%s)!\n", filename );
-      orig_fopen = dlsym( RTLD_NEXT, "fopen" );
-      return orig_fopen( filename, mode );
-    }
+  if (orig_fopen == NULL)
+  {
+    printf("Preinit function fopen called (filename=%s)!\n", filename);
+    orig_fopen = dlsym(RTLD_NEXT, "fopen");
+    return orig_fopen(filename, mode);
+  }
 
-    if (!fcheck_granted(filename, mode))
+  if (!fcheck_granted(filename, mode))
+  {
+    if (shareiso_dry_run)
     {
+      logfile_write("fopen: dry run, access to '%s' denied", filename);
+    }
+    else
+    {
+      // if we are not in dry run mode, we deny the access
       logfile_write("fopen: access to '%s' denied", filename);
       errno = EACCES; // set errno to access denied
       return NULL;      // access denied
     }
-    else
-    {
-      logfile_write("fopen: access to '%s' granted", filename);
-    }
-
-  file = orig_fopen( filename, mode );
-  if ( file != NULL )
-    {
-      logfile_write( "fopen: filename='%s' mode='%s' result=OK", filename, mode );
-    }
+  }
   else
-    {
-      logfile_write( "fopen: filename='%s' mode='%s' result=FAIL", filename, mode );
-    }
+  {
+    logfile_write("fopen: access to '%s' granted", filename);
+  }
+
+  file = orig_fopen(filename, mode);
 
   return file;
 }
 
 
-
-
 /* fopen64 overloading functions */
 
-FILE *fopen64 (const char *filename,
-	        const char *mode)
+FILE *fopen64(const char *filename, const char *mode)
 {
   FILE *file;
 
   /* do some sanity checks */
-  if ( orig_fopen64 == NULL )
-    {
-      printf( "Preinit function fopen64 called (filename=%s)!\n", filename );
-      orig_fopen64 = dlsym( RTLD_NEXT, "fopen64" );
-      return orig_fopen64( filename, mode );
-    }
+  if (orig_fopen64 == NULL)
+  {
+    printf( "Preinit function fopen64 called (filename=%s)!\n", filename);
+    orig_fopen64 = dlsym(RTLD_NEXT, "fopen64");
+    return orig_fopen64(filename, mode);
+  }
 
   file = orig_fopen64( filename, mode );
   if ( file != NULL )

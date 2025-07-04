@@ -7,7 +7,7 @@ mkdir out
 export SHAREISO_READ_WHITELIST="/etc:/usr:/var/lib/texmf:."
 export SHAREISO_WRITE_WHITELIST="."
 
-export IOSTAT_PARAM="-v -l test2.log"
+export SHAREISO_PARAM="-l test2.log"
 
 
 export LD_PRELOAD=../libshareiso.so 
