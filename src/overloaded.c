@@ -1,8 +1,8 @@
 /* overloaded.c
 
    written by: Oliver Cordes 2012-08-02
-   changed by: Oliver Cordes 2025-07-04
-
+   changed by: Oliver Cordes 2025-09-09
+  
 */
 
 #define _GNU_SOURCE
@@ -367,4 +367,43 @@ DIR *_opendir(const char *name)
     }
 
   return dir;
+}
+
+
+/* overwrite stat */
+
+
+int stat(const char *pathname, struct stat *statbuf)
+{
+  int result;
+
+  result = orig_stat(pathname, statbuf);
+
+  logfile_write("stat: pathname='%s' result=%i", pathname, result);
+
+  return result;
+}
+
+int statx(int dirfd, const char *pathname, int flags,
+          unsigned int mask, struct statx *statxbuf)
+{
+  int result;
+
+  if (check_granted(pathname, O_RDONLY) == 0) {
+    if (shareiso_dry_run) {
+      logfile_write("statx: dry run, access to '%s' denied", pathname);
+    } else {
+      logfile_write("statx: access to '%s' denied", pathname);
+      
+      errno = EACCES; // set errno to access denied
+      return -1;      // access denied
+    }
+  }
+
+  result = orig_statx(dirfd, pathname, flags, mask, statxbuf);
+
+  logfile_write("statx: dirfd=%i pathname='%s' flags=%i mask=%u result=%i",
+                dirfd, pathname, flags, mask, result);
+
+  return result;
 }

@@ -1,7 +1,7 @@
 /* shareiso.c
 
    written by: Oliver Cordes 2025-06-28
-   changed by: Oliver Cordes 2025-07-02
+   changed by: Oliver Cordes 2025-09-09
 
 */
 
@@ -68,6 +68,9 @@ void __attach(void)
   copy_orig_function((void*) &orig_fopen64, "fopen64");
   
   copy_orig_function( (void*) &orig_opendir, "opendir");
+
+  copy_orig_function( (void*) &orig_stat, "stat");
+  copy_orig_function( (void*) &orig_statx, "statx");
 
   // read the original command line of the attached process
   s = get_cmdline();
