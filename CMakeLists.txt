@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
 # minimal CMake configuration for sharelatex-isolation library
 
-project(sharelatex-isolation VERSION 0.0.1 DESCRIPTION "sharelatex-isolation library")
+project(sharelatex-isolation VERSION 0.0.1 DESCRIPTION "sharelatex-isolation library" LANGUAGES C)
 
 set(VERSION 0.0.1)
 
