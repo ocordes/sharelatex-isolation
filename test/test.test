@@ -1,22 +1,22 @@
-execve("/usr/bin/ls", ["ls", "-R", ".."], 0x7ffdc4a761f0 /* 59 vars */) = 0
-brk(NULL)                               = 0x633243b81000
-arch_prctl(0x3001 /* ARCH_??? */, 0x7ffc281576d0) = -1 EINVAL (Invalid argument)
-mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x74139bd34000
+execve("/usr/bin/ls", ["ls", "-R", ".."], 0x7ffd27d59ff0 /* 59 vars */) = 0
+brk(NULL)                               = 0x5e19dec96000
+arch_prctl(0x3001 /* ARCH_??? */, 0x7ffe05210d80) = -1 EINVAL (Invalid argument)
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7b7c01898000
 access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
 openat(AT_FDCWD, "/usr/local/cuda/lib64/tls/x86_64/x86_64/libselinux.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
-newfstatat(AT_FDCWD, "/usr/local/cuda/lib64/tls/x86_64/x86_64", 0x7ffc281568f0, 0) = -1 ENOENT (No such file or directory)
+newfstatat(AT_FDCWD, "/usr/local/cuda/lib64/tls/x86_64/x86_64", 0x7ffe0520ffa0, 0) = -1 ENOENT (No such file or directory)
 openat(AT_FDCWD, "/usr/local/cuda/lib64/tls/x86_64/libselinux.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
-newfstatat(AT_FDCWD, "/usr/local/cuda/lib64/tls/x86_64", 0x7ffc281568f0, 0) = -1 ENOENT (No such file or directory)
+newfstatat(AT_FDCWD, "/usr/local/cuda/lib64/tls/x86_64", 0x7ffe0520ffa0, 0) = -1 ENOENT (No such file or directory)
 openat(AT_FDCWD, "/usr/local/cuda/lib64/tls/x86_64/libselinux.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
-newfstatat(AT_FDCWD, "/usr/local/cuda/lib64/tls/x86_64", 0x7ffc281568f0, 0) = -1 ENOENT (No such file or directory)
+newfstatat(AT_FDCWD, "/usr/local/cuda/lib64/tls/x86_64", 0x7ffe0520ffa0, 0) = -1 ENOENT (No such file or directory)
 openat(AT_FDCWD, "/usr/local/cuda/lib64/tls/libselinux.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
-newfstatat(AT_FDCWD, "/usr/local/cuda/lib64/tls", 0x7ffc281568f0, 0) = -1 ENOENT (No such file or directory)
+newfstatat(AT_FDCWD, "/usr/local/cuda/lib64/tls", 0x7ffe0520ffa0, 0) = -1 ENOENT (No such file or directory)
 openat(AT_FDCWD, "/usr/local/cuda/lib64/x86_64/x86_64/libselinux.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
-newfstatat(AT_FDCWD, "/usr/local/cuda/lib64/x86_64/x86_64", 0x7ffc281568f0, 0) = -1 ENOENT (No such file or directory)
+newfstatat(AT_FDCWD, "/usr/local/cuda/lib64/x86_64/x86_64", 0x7ffe0520ffa0, 0) = -1 ENOENT (No such file or directory)
 openat(AT_FDCWD, "/usr/local/cuda/lib64/x86_64/libselinux.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
-newfstatat(AT_FDCWD, "/usr/local/cuda/lib64/x86_64", 0x7ffc281568f0, 0) = -1 ENOENT (No such file or directory)
+newfstatat(AT_FDCWD, "/usr/local/cuda/lib64/x86_64", 0x7ffe0520ffa0, 0) = -1 ENOENT (No such file or directory)
 openat(AT_FDCWD, "/usr/local/cuda/lib64/x86_64/libselinux.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
-newfstatat(AT_FDCWD, "/usr/local/cuda/lib64/x86_64", 0x7ffc281568f0, 0) = -1 ENOENT (No such file or directory)
+newfstatat(AT_FDCWD, "/usr/local/cuda/lib64/x86_64", 0x7ffe0520ffa0, 0) = -1 ENOENT (No such file or directory)
 openat(AT_FDCWD, "/usr/local/cuda/lib64/libselinux.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
 newfstatat(AT_FDCWD, "/usr/local/cuda/lib64", {st_mode=S_IFDIR|0755, st_size=12288, ...}, 0) = 0
 openat(AT_FDCWD, "tls/x86_64/x86_64/libselinux.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
@@ -28,18 +28,18 @@ openat(AT_FDCWD, "x86_64/libselinux.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No s
 openat(AT_FDCWD, "x86_64/libselinux.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
 openat(AT_FDCWD, "libselinux.so.1", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
 openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
-newfstatat(3, "", {st_mode=S_IFREG|0644, st_size=318812, ...}, AT_EMPTY_PATH) = 0
-mmap(NULL, 318812, PROT_READ, MAP_PRIVATE, 3, 0) = 0x74139bce6000
+newfstatat(3, "", {st_mode=S_IFREG|0644, st_size=318936, ...}, AT_EMPTY_PATH) = 0
+mmap(NULL, 318936, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7b7c0184a000
 close(3)                                = 0
 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libselinux.so.1", O_RDONLY|O_CLOEXEC) = 3
 read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
 newfstatat(3, "", {st_mode=S_IFREG|0644, st_size=166280, ...}, AT_EMPTY_PATH) = 0
-mmap(NULL, 177672, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x74139bcba000
-mprotect(0x74139bcc0000, 139264, PROT_NONE) = 0
-mmap(0x74139bcc0000, 106496, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x6000) = 0x74139bcc0000
-mmap(0x74139bcda000, 28672, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x20000) = 0x74139bcda000
-mmap(0x74139bce2000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x27000) = 0x74139bce2000
-mmap(0x74139bce4000, 5640, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x74139bce4000
+mmap(NULL, 177672, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7b7c0181e000
+mprotect(0x7b7c01824000, 139264, PROT_NONE) = 0
+mmap(0x7b7c01824000, 106496, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x6000) = 0x7b7c01824000
+mmap(0x7b7c0183e000, 28672, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x20000) = 0x7b7c0183e000
+mmap(0x7b7c01846000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x27000) = 0x7b7c01846000
+mmap(0x7b7c01848000, 5640, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7b7c01848000
 close(3)                                = 0
 openat(AT_FDCWD, "/usr/local/cuda/lib64/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
 openat(AT_FDCWD, "tls/x86_64/x86_64/libc.so.6", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
@@ -57,12 +57,12 @@ pread64(3, "\4\0\0\0 \0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0"..., 
 pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\325\31p\226\367\t\200\30)\261\30\257\33|\366c"..., 68, 896) = 68
 newfstatat(3, "", {st_mode=S_IFREG|0755, st_size=2220400, ...}, AT_EMPTY_PATH) = 0
 pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784
-mmap(NULL, 2264656, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x74139ba00000
-mprotect(0x74139ba28000, 2023424, PROT_NONE) = 0
-mmap(0x74139ba28000, 1658880, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x28000) = 0x74139ba28000
-mmap(0x74139bbbd000, 360448, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1bd000) = 0x74139bbbd000
-mmap(0x74139bc16000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x215000) = 0x74139bc16000
-mmap(0x74139bc1c000, 52816, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x74139bc1c000
+mmap(NULL, 2264656, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7b7c01400000
+mprotect(0x7b7c01428000, 2023424, PROT_NONE) = 0
+mmap(0x7b7c01428000, 1658880, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x28000) = 0x7b7c01428000
+mmap(0x7b7c015bd000, 360448, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1bd000) = 0x7b7c015bd000
+mmap(0x7b7c01616000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x215000) = 0x7b7c01616000
+mmap(0x7b7c0161c000, 52816, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7b7c0161c000
 close(3)                                = 0
 openat(AT_FDCWD, "/usr/local/cuda/lib64/libpcre2-8.so.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
 openat(AT_FDCWD, "tls/x86_64/x86_64/libpcre2-8.so.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such file or directory)
@@ -76,28 +76,28 @@ openat(AT_FDCWD, "libpcre2-8.so.0", O_RDONLY|O_CLOEXEC) = -1 ENOENT (No such fil
 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libpcre2-8.so.0", O_RDONLY|O_CLOEXEC) = 3
 read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
 newfstatat(3, "", {st_mode=S_IFREG|0644, st_size=613064, ...}, AT_EMPTY_PATH) = 0
-mmap(NULL, 615184, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x74139b969000
-mmap(0x74139b96b000, 438272, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2000) = 0x74139b96b000
-mmap(0x74139b9d6000, 163840, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x6d000) = 0x74139b9d6000
-mmap(0x74139b9fe000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x94000) = 0x74139b9fe000
+mmap(NULL, 615184, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7b7c01787000
+mmap(0x7b7c01789000, 438272, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2000) = 0x7b7c01789000
+mmap(0x7b7c017f4000, 163840, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x6d000) = 0x7b7c017f4000
+mmap(0x7b7c0181c000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x94000) = 0x7b7c0181c000
 close(3)                                = 0
-mmap(NULL, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x74139bcb7000
-arch_prctl(ARCH_SET_FS, 0x74139bcb7800) = 0
-set_tid_address(0x74139bcb7ad0)         = 3824269
-set_robust_list(0x74139bcb7ae0, 24)     = 0
-rseq(0x74139bcb81a0, 0x20, 0, 0x53053053) = 0
-mprotect(0x74139bc16000, 16384, PROT_READ) = 0
-mprotect(0x74139b9fe000, 4096, PROT_READ) = 0
-mprotect(0x74139bce2000, 4096, PROT_READ) = 0
-mprotect(0x633213abe000, 8192, PROT_READ) = 0
-mprotect(0x74139bd6e000, 8192, PROT_READ) = 0
+mmap(NULL, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7b7c01784000
+arch_prctl(ARCH_SET_FS, 0x7b7c01784800) = 0
+set_tid_address(0x7b7c01784ad0)         = 1547772
+set_robust_list(0x7b7c01784ae0, 24)     = 0
+rseq(0x7b7c017851a0, 0x20, 0, 0x53053053) = 0
+mprotect(0x7b7c01616000, 16384, PROT_READ) = 0
+mprotect(0x7b7c0181c000, 4096, PROT_READ) = 0
+mprotect(0x7b7c01846000, 4096, PROT_READ) = 0
+mprotect(0x5e19d9beb000, 8192, PROT_READ) = 0
+mprotect(0x7b7c018d2000, 8192, PROT_READ) = 0
 prlimit64(0, RLIMIT_STACK, NULL, {rlim_cur=8192*1024, rlim_max=RLIM64_INFINITY}) = 0
-munmap(0x74139bce6000, 318812)          = 0
-statfs("/sys/fs/selinux", 0x7ffc28157710) = -1 ENOENT (No such file or directory)
-statfs("/selinux", 0x7ffc28157710)      = -1 ENOENT (No such file or directory)
-getrandom("\x89\x24\x77\x59\x0d\xc5\xa2\x4b", 8, GRND_NONBLOCK) = 8
-brk(NULL)                               = 0x633243b81000
-brk(0x633243ba2000)                     = 0x633243ba2000
+munmap(0x7b7c0184a000, 318936)          = 0
+statfs("/sys/fs/selinux", 0x7ffe05210dc0) = -1 ENOENT (No such file or directory)
+statfs("/selinux", 0x7ffe05210dc0)      = -1 ENOENT (No such file or directory)
+getrandom("\x55\x7f\xcf\x3f\x9e\xc2\x2e\x86", 8, GRND_NONBLOCK) = 8
+brk(NULL)                               = 0x5e19dec96000
+brk(0x5e19decb7000)                     = 0x5e19decb7000
 openat(AT_FDCWD, "/proc/filesystems", O_RDONLY|O_CLOEXEC) = 3
 newfstatat(3, "", {st_mode=S_IFREG|0444, st_size=0, ...}, AT_EMPTY_PATH) = 0
 read(3, "nodev\tsysfs\nnodev\ttmpfs\nnodev\tbd"..., 1024) = 475
@@ -106,36 +106,37 @@ close(3)                                = 0
 access("/etc/selinux/config", F_OK)     = 0
 openat(AT_FDCWD, "/usr/lib/locale/locale-archive", O_RDONLY|O_CLOEXEC) = 3
 newfstatat(3, "", {st_mode=S_IFREG|0644, st_size=6096560, ...}, AT_EMPTY_PATH) = 0
-mmap(NULL, 6096560, PROT_READ, MAP_PRIVATE, 3, 0) = 0x74139b200000
+mmap(NULL, 6096560, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7b7c00e00000
 close(3)                                = 0
 ioctl(1, TCGETS, {B38400 opost isig icanon echo ...}) = 0
-ioctl(1, TIOCGWINSZ, {ws_row=52, ws_col=131, ws_xpixel=917, ws_ypixel=884}) = 0
+ioctl(1, TIOCGWINSZ, {ws_row=41, ws_col=134, ws_xpixel=938, ws_ypixel=697}) = 0
 statx(AT_FDCWD, "..", AT_STATX_SYNC_AS_STAT|AT_NO_AUTOMOUNT, STATX_MODE, {stx_mask=STATX_BASIC_STATS|STATX_MNT_ID, stx_attributes=0, stx_mode=S_IFDIR|0755, stx_size=4096, ...}) = 0
 openat(AT_FDCWD, "..", O_RDONLY|O_NONBLOCK|O_CLOEXEC|O_DIRECTORY) = 3
 newfstatat(3, "", {st_mode=S_IFDIR|0755, st_size=4096, ...}, AT_EMPTY_PATH) = 0
 statx(3, "", AT_STATX_SYNC_AS_STAT|AT_NO_AUTOMOUNT|AT_EMPTY_PATH, STATX_INO, {stx_mask=STATX_BASIC_STATS|STATX_MNT_ID, stx_attributes=0, stx_mode=S_IFDIR|0755, stx_size=4096, ...}) = 0
 newfstatat(1, "", {st_mode=S_IFCHR|0620, st_rdev=makedev(0x88, 0), ...}, AT_EMPTY_PATH) = 0
 write(1, "..:\n", 4)                    = 4
-getdents64(3, 0x633243b88ce0 /* 18 entries */, 32768) = 584
-getdents64(3, 0x633243b88ce0 /* 0 entries */, 32768) = 0
+getdents64(3, 0x5e19dec9dce0 /* 20 entries */, 32768) = 656
+getdents64(3, 0x5e19dec9dce0 /* 0 entries */, 32768) = 0
 close(3)                                = 0
-write(1, "build\t\tCMakeFiles\t     CMakeList"..., 92) = 92
-write(1, "CMakeCache.txt\tcmake_install.cma"..., 97) = 97
+write(1, "build\t\tcmake_install.cmake  libs"..., 77) = 77
+write(1, "CMakeCache.txt\tCMakeLists.txt\t  "..., 70) = 70
+write(1, "CMakeFiles\tconfig.h\t     libshar"..., 74) = 74
 openat(AT_FDCWD, "../build", O_RDONLY|O_NONBLOCK|O_CLOEXEC|O_DIRECTORY) = 3
 newfstatat(3, "", {st_mode=S_IFDIR|0755, st_size=6, ...}, AT_EMPTY_PATH) = 0
 statx(3, "", AT_STATX_SYNC_AS_STAT|AT_NO_AUTOMOUNT|AT_EMPTY_PATH, STATX_INO, {stx_mask=STATX_BASIC_STATS|STATX_MNT_ID, stx_attributes=0, stx_mode=S_IFDIR|0755, stx_size=6, ...}) = 0
 write(1, "\n", 1)                       = 1
 write(1, "../build:\n", 10)             = 10
-getdents64(3, 0x633243b90ee0 /* 2 entries */, 32768) = 48
-getdents64(3, 0x633243b90ee0 /* 0 entries */, 32768) = 0
+getdents64(3, 0x5e19deca5f20 /* 2 entries */, 32768) = 48
+getdents64(3, 0x5e19deca5f20 /* 0 entries */, 32768) = 0
 close(3)                                = 0
 openat(AT_FDCWD, "../CMakeFiles", O_RDONLY|O_NONBLOCK|O_CLOEXEC|O_DIRECTORY) = 3
 newfstatat(3, "", {st_mode=S_IFDIR|0755, st_size=304, ...}, AT_EMPTY_PATH) = 0
 statx(3, "", AT_STATX_SYNC_AS_STAT|AT_NO_AUTOMOUNT|AT_EMPTY_PATH, STATX_INO, {stx_mask=STATX_BASIC_STATS|STATX_MNT_ID, stx_attributes=0, stx_mode=S_IFDIR|0755, stx_size=304, ...}) = 0
 write(1, "\n", 1)                       = 1
 write(1, "../CMakeFiles:\n", 15)        = 15
-getdents64(3, 0x633243b90e40 /* 13 entries */, 32768) = 480
-getdents64(3, 0x633243b90e40 /* 0 entries */, 32768) = 0
+getdents64(3, 0x5e19deca5ea0 /* 13 entries */, 32768) = 480
+getdents64(3, 0x5e19deca5ea0 /* 0 entries */, 32768) = 0
 close(3)                                = 0
 write(1, "3.22.1\t\t   CMakeDirectoryInforma"..., 111) = 111
 write(1, "cmake.check_cache  CMakeOutput.l"..., 86) = 86
@@ -144,8 +145,8 @@ newfstatat(3, "", {st_mode=S_IFDIR|0755, st_size=241, ...}, AT_EMPTY_PATH) = 0
 statx(3, "", AT_STATX_SYNC_AS_STAT|AT_NO_AUTOMOUNT|AT_EMPTY_PATH, STATX_INO, {stx_mask=STATX_BASIC_STATS|STATX_MNT_ID, stx_attributes=0, stx_mode=S_IFDIR|0755, stx_size=241, ...}) = 0
 write(1, "\n", 1)                       = 1
 write(1, "../CMakeFiles/3.22.1:\n", 22) = 22
-getdents64(3, 0x633243b90e40 /* 9 entries */, 32768) = 360
-getdents64(3, 0x633243b90e40 /* 0 entries */, 32768) = 0
+getdents64(3, 0x5e19deca5ea0 /* 9 entries */, 32768) = 360
+getdents64(3, 0x5e19deca5ea0 /* 0 entries */, 32768) = 0
 close(3)                                = 0
 write(1, "CMakeCCompiler.cmake\tCMakeDeterm"..., 89) = 89
 write(1, "CMakeCXXCompiler.cmake\tCMakeDete"..., 70) = 70
@@ -154,8 +155,8 @@ newfstatat(3, "", {st_mode=S_IFDIR|0755, st_size=72, ...}, AT_EMPTY_PATH) = 0
 statx(3, "", AT_STATX_SYNC_AS_STAT|AT_NO_AUTOMOUNT|AT_EMPTY_PATH, STATX_INO, {stx_mask=STATX_BASIC_STATS|STATX_MNT_ID, stx_attributes=0, stx_mode=S_IFDIR|0755, stx_size=72, ...}) = 0
 write(1, "\n", 1)                       = 1
 write(1, "../CMakeFiles/3.22.1/CompilerIdC"..., 34) = 34
-getdents64(3, 0x633243b90e40 /* 5 entries */, 32768) = 144
-getdents64(3, 0x633243b90e40 /* 0 entries */, 32768) = 0
+getdents64(3, 0x5e19deca5ea0 /* 5 entries */, 32768) = 144
+getdents64(3, 0x5e19deca5ea0 /* 0 entries */, 32768) = 0
 close(3)                                = 0
 write(1, "a.out  CMakeCCompilerId.c  tmp\n", 31) = 31
 openat(AT_FDCWD, "../CMakeFiles/3.22.1/CompilerIdC/tmp", O_RDONLY|O_NONBLOCK|O_CLOEXEC|O_DIRECTORY) = 3
@@ -163,16 +164,16 @@ newfstatat(3, "", {st_mode=S_IFDIR|0755, st_size=10, ...}, AT_EMPTY_PATH) = 0
 statx(3, "", AT_STATX_SYNC_AS_STAT|AT_NO_AUTOMOUNT|AT_EMPTY_PATH, STATX_INO, {stx_mask=STATX_BASIC_STATS|STATX_MNT_ID, stx_attributes=0, stx_mode=S_IFDIR|0755, stx_size=10, ...}) = 0
 write(1, "\n", 1)                       = 1
 write(1, "../CMakeFiles/3.22.1/CompilerIdC"..., 38) = 38
-getdents64(3, 0x633243b90e40 /* 2 entries */, 32768) = 48
-getdents64(3, 0x633243b90e40 /* 0 entries */, 32768) = 0
+getdents64(3, 0x5e19deca5ea0 /* 2 entries */, 32768) = 48
+getdents64(3, 0x5e19deca5ea0 /* 0 entries */, 32768) = 0
 close(3)                                = 0
 openat(AT_FDCWD, "../CMakeFiles/3.22.1/CompilerIdCXX", O_RDONLY|O_NONBLOCK|O_CLOEXEC|O_DIRECTORY) = 3
 newfstatat(3, "", {st_mode=S_IFDIR|0755, st_size=60, ...}, AT_EMPTY_PATH) = 0
 statx(3, "", AT_STATX_SYNC_AS_STAT|AT_NO_AUTOMOUNT|AT_EMPTY_PATH, STATX_INO, {stx_mask=STATX_BASIC_STATS|STATX_MNT_ID, stx_attributes=0, stx_mode=S_IFDIR|0755, stx_size=60, ...}) = 0
 write(1, "\n", 1)                       = 1
 write(1, "../CMakeFiles/3.22.1/CompilerIdC"..., 36) = 36
-getdents64(3, 0x633243b90e40 /* 5 entries */, 32768) = 152
-getdents64(3, 0x633243b90e40 /* 0 entries */, 32768) = 0
+getdents64(3, 0x5e19deca5ea0 /* 5 entries */, 32768) = 152
+getdents64(3, 0x5e19deca5ea0 /* 0 entries */, 32768) = 0
 close(3)                                = 0
 write(1, "a.out  CMakeCXXCompilerId.cpp  t"..., 35) = 35
 openat(AT_FDCWD, "../CMakeFiles/3.22.1/CompilerIdCXX/tmp", O_RDONLY|O_NONBLOCK|O_CLOEXEC|O_DIRECTORY) = 3
@@ -180,24 +181,24 @@ newfstatat(3, "", {st_mode=S_IFDIR|0755, st_size=6, ...}, AT_EMPTY_PATH) = 0
 statx(3, "", AT_STATX_SYNC_AS_STAT|AT_NO_AUTOMOUNT|AT_EMPTY_PATH, STATX_INO, {stx_mask=STATX_BASIC_STATS|STATX_MNT_ID, stx_attributes=0, stx_mode=S_IFDIR|0755, stx_size=6, ...}) = 0
 write(1, "\n", 1)                       = 1
 write(1, "../CMakeFiles/3.22.1/CompilerIdC"..., 40) = 40
-getdents64(3, 0x633243b90e40 /* 2 entries */, 32768) = 48
-getdents64(3, 0x633243b90e40 /* 0 entries */, 32768) = 0
+getdents64(3, 0x5e19deca5ea0 /* 2 entries */, 32768) = 48
+getdents64(3, 0x5e19deca5ea0 /* 0 entries */, 32768) = 0
 close(3)                                = 0
 openat(AT_FDCWD, "../CMakeFiles/CMakeTmp", O_RDONLY|O_NONBLOCK|O_CLOEXEC|O_DIRECTORY) = 3
 newfstatat(3, "", {st_mode=S_IFDIR|0755, st_size=6, ...}, AT_EMPTY_PATH) = 0
 statx(3, "", AT_STATX_SYNC_AS_STAT|AT_NO_AUTOMOUNT|AT_EMPTY_PATH, STATX_INO, {stx_mask=STATX_BASIC_STATS|STATX_MNT_ID, stx_attributes=0, stx_mode=S_IFDIR|0755, stx_size=6, ...}) = 0
 write(1, "\n", 1)                       = 1
 write(1, "../CMakeFiles/CMakeTmp:\n", 24) = 24
-getdents64(3, 0x633243b90e00 /* 2 entries */, 32768) = 48
-getdents64(3, 0x633243b90e00 /* 0 entries */, 32768) = 0
+getdents64(3, 0x5e19deca5ea0 /* 2 entries */, 32768) = 48
+getdents64(3, 0x5e19deca5ea0 /* 0 entries */, 32768) = 0
 close(3)                                = 0
 openat(AT_FDCWD, "../CMakeFiles/libshareiso.dir", O_RDONLY|O_NONBLOCK|O_CLOEXEC|O_DIRECTORY) = 3
 newfstatat(3, "", {st_mode=S_IFDIR|0755, st_size=292, ...}, AT_EMPTY_PATH) = 0
 statx(3, "", AT_STATX_SYNC_AS_STAT|AT_NO_AUTOMOUNT|AT_EMPTY_PATH, STATX_INO, {stx_mask=STATX_BASIC_STATS|STATX_MNT_ID, stx_attributes=0, stx_mode=S_IFDIR|0755, stx_size=292, ...}) = 0
 write(1, "\n", 1)                       = 1
 write(1, "../CMakeFiles/libshareiso.dir:\n", 31) = 31
-getdents64(3, 0x633243b90e00 /* 13 entries */, 32768) = 448
-getdents64(3, 0x633243b90e00 /* 0 entries */, 32768) = 0
+getdents64(3, 0x5e19deca5ea0 /* 13 entries */, 32768) = 448
+getdents64(3, 0x5e19deca5ea0 /* 0 entries */, 32768) = 0
 close(3)                                = 0
 write(1, "build.make\t   cmake_clean_target"..., 91) = 91
 write(1, "cmake_clean.cmake  compiler_depe"..., 90) = 90
@@ -206,49 +207,78 @@ newfstatat(3, "", {st_mode=S_IFDIR|0755, st_size=10, ...}, AT_EMPTY_PATH) = 0
 statx(3, "", AT_STATX_SYNC_AS_STAT|AT_NO_AUTOMOUNT|AT_EMPTY_PATH, STATX_INO, {stx_mask=STATX_BASIC_STATS|STATX_MNT_ID, stx_attributes=0, stx_mode=S_IFDIR|0755, stx_size=10, ...}) = 0
 write(1, "\n", 1)                       = 1
 write(1, "../CMakeFiles/libshareiso.dir/sr"..., 35) = 35
-getdents64(3, 0x633243b90e00 /* 2 entries */, 32768) = 48
-getdents64(3, 0x633243b90e00 /* 0 entries */, 32768) = 0
+getdents64(3, 0x5e19deca5ea0 /* 2 entries */, 32768) = 48
+getdents64(3, 0x5e19deca5ea0 /* 0 entries */, 32768) = 0
 close(3)                                = 0
 openat(AT_FDCWD, "../CMakeFiles/shareiso.dir", O_RDONLY|O_NONBLOCK|O_CLOEXEC|O_DIRECTORY) = 3
-newfstatat(3, "", {st_mode=S_IFDIR|0755, st_size=328, ...}, AT_EMPTY_PATH) = 0
-statx(3, "", AT_STATX_SYNC_AS_STAT|AT_NO_AUTOMOUNT|AT_EMPTY_PATH, STATX_INO, {stx_mask=STATX_BASIC_STATS|STATX_MNT_ID, stx_attributes=0, stx_mode=S_IFDIR|0755, stx_size=328, ...}) = 0
+newfstatat(3, "", {st_mode=S_IFDIR|0755, st_size=4096, ...}, AT_EMPTY_PATH) = 0
+statx(3, "", AT_STATX_SYNC_AS_STAT|AT_NO_AUTOMOUNT|AT_EMPTY_PATH, STATX_INO, {stx_mask=STATX_BASIC_STATS|STATX_MNT_ID, stx_attributes=0, stx_mode=S_IFDIR|0755, stx_size=4096, ...}) = 0
 write(1, "\n", 1)                       = 1
 write(1, "../CMakeFiles/shareiso.dir:\n", 28) = 28
-getdents64(3, 0x633243b90e00 /* 14 entries */, 32768) = 496
-getdents64(3, 0x633243b90e00 /* 0 entries */, 32768) = 0
+getdents64(3, 0x5e19deca5ea0 /* 15 entries */, 32768) = 528
+getdents64(3, 0x5e19deca5ea0 /* 0 entries */, 32768) = 0
 close(3)                                = 0
-write(1, "build.make\t   cmake_clean_target"..., 106) = 106
+write(1, "build.make\t   cmake_clean_target"..., 116) = 116
 write(1, "cmake_clean.cmake  compiler_depe"..., 98) = 98
 openat(AT_FDCWD, "../CMakeFiles/shareiso.dir/src", O_RDONLY|O_NONBLOCK|O_CLOEXEC|O_DIRECTORY) = 3
-newfstatat(3, "", {st_mode=S_IFDIR|0755, st_size=300, ...}, AT_EMPTY_PATH) = 0
-statx(3, "", AT_STATX_SYNC_AS_STAT|AT_NO_AUTOMOUNT|AT_EMPTY_PATH, STATX_INO, {stx_mask=STATX_BASIC_STATS|STATX_MNT_ID, stx_attributes=0, stx_mode=S_IFDIR|0755, stx_size=300, ...}) = 0
+newfstatat(3, "", {st_mode=S_IFDIR|0755, st_size=4096, ...}, AT_EMPTY_PATH) = 0
+statx(3, "", AT_STATX_SYNC_AS_STAT|AT_NO_AUTOMOUNT|AT_EMPTY_PATH, STATX_INO, {stx_mask=STATX_BASIC_STATS|STATX_MNT_ID, stx_attributes=0, stx_mode=S_IFDIR|0755, stx_size=4096, ...}) = 0
 write(1, "\n", 1)                       = 1
 write(1, "../CMakeFiles/shareiso.dir/src:\n", 32) = 32
-getdents64(3, 0x633243b90e00 /* 14 entries */, 32768) = 472
-getdents64(3, 0x633243b90e00 /* 0 entries */, 32768) = 0
+getdents64(3, 0x5e19deca5ea0 /* 20 entries */, 32768) = 704
+getdents64(3, 0x5e19deca5ea0 /* 0 entries */, 32768) = 0
 close(3)                                = 0
-write(1, "file_stat.c.o\t iostat.c.o    log"..., 83) = 83
-write(1, "file_stat.c.o.d  iostat.c.o.d  l"..., 89) = 89
+write(1, "file_stat.c.o\t iostat.c.o.d\t  lo"..., 89) = 89
+write(1, "file_stat.c.o.d  isolation.c.o\t "..., 92) = 92
+write(1, "iostat.c.o\t isolation.c.o.d  ove"..., 92) = 92
+openat(AT_FDCWD, "../CMakeFiles/shareiso.dir/whitelist", O_RDONLY|O_NONBLOCK|O_CLOEXEC|O_DIRECTORY) = 3
+newfstatat(3, "", {st_mode=S_IFDIR|0755, st_size=62, ...}, AT_EMPTY_PATH) = 0
+statx(3, "", AT_STATX_SYNC_AS_STAT|AT_NO_AUTOMOUNT|AT_EMPTY_PATH, STATX_INO, {stx_mask=STATX_BASIC_STATS|STATX_MNT_ID, stx_attributes=0, stx_mode=S_IFDIR|0755, stx_size=62, ...}) = 0
+write(1, "\n", 1)                       = 1
+write(1, "../CMakeFiles/shareiso.dir/white"..., 38) = 38
+getdents64(3, 0x5e19deca5ea0 /* 4 entries */, 32768) = 128
+getdents64(3, 0x5e19deca5ea0 /* 0 entries */, 32768) = 0
+close(3)                                = 0
+write(1, "whitelist.c.o  whitelist.c.o.d\n", 31) = 31
 openat(AT_FDCWD, "../src", O_RDONLY|O_NONBLOCK|O_CLOEXEC|O_DIRECTORY) = 3
-newfstatat(3, "", {st_mode=S_IFDIR|0755, st_size=243, ...}, AT_EMPTY_PATH) = 0
-statx(3, "", AT_STATX_SYNC_AS_STAT|AT_NO_AUTOMOUNT|AT_EMPTY_PATH, STATX_INO, {stx_mask=STATX_BASIC_STATS|STATX_MNT_ID, stx_attributes=0, stx_mode=S_IFDIR|0755, stx_size=243, ...}) = 0
+newfstatat(3, "", {st_mode=S_IFDIR|0755, st_size=4096, ...}, AT_EMPTY_PATH) = 0
+statx(3, "", AT_STATX_SYNC_AS_STAT|AT_NO_AUTOMOUNT|AT_EMPTY_PATH, STATX_INO, {stx_mask=STATX_BASIC_STATS|STATX_MNT_ID, stx_attributes=0, stx_mode=S_IFDIR|0755, stx_size=4096, ...}) = 0
 write(1, "\n", 1)                       = 1
 write(1, "../src:\n", 8)                = 8
-getdents64(3, 0x633243b90e00 /* 13 entries */, 32768) = 400
-getdents64(3, 0x633243b90e00 /* 0 entries */, 32768) = 0
+getdents64(3, 0x5e19deca5ea0 /* 17 entries */, 32768) = 528
+getdents64(3, 0x5e19deca5ea0 /* 0 entries */, 32768) = 0
 close(3)                                = 0
-write(1, "config.h.in  file_stat.c  file_s"..., 122) = 122
+write(1, "config.h.in  file_stat.h  isolat"..., 96) = 96
+write(1, "file_stat.c  isolation.c  logfil"..., 83) = 83
 openat(AT_FDCWD, "../test", O_RDONLY|O_NONBLOCK|O_CLOEXEC|O_DIRECTORY) = 3
 newfstatat(3, "", {st_mode=S_IFDIR|0755, st_size=4096, ...}, AT_EMPTY_PATH) = 0
 statx(3, "", AT_STATX_SYNC_AS_STAT|AT_NO_AUTOMOUNT|AT_EMPTY_PATH, STATX_INO, {stx_mask=STATX_BASIC_STATS|STATX_MNT_ID, stx_attributes=0, stx_mode=S_IFDIR|0755, stx_size=4096, ...}) = 0
 write(1, "\n", 1)                       = 1
 write(1, "../test:\n", 9)               = 9
-getdents64(3, 0x633243b90e00 /* 22 entries */, 32768) = 704
-getdents64(3, 0x633243b90e00 /* 0 entries */, 32768) = 0
+getdents64(3, 0x5e19deca5ea0 /* 25 entries */, 32768) = 792
+getdents64(3, 0x5e19deca5ea0 /* 0 entries */, 32768) = 0
 close(3)                                = 0
-write(1, "hallo.text\tspookie1.fdb_latexmk "..., 97) = 97
-write(1, "helloworld.tex\tspookie1.fls\t    "..., 98) = 98
-write(1, "spookie1.aux\tspookie1.log\t      "..., 85) = 85
+write(1, "helloworld.tex\tmain.tex      spo"..., 112) = 112
+write(1, "main2.tex\tout\t      spookie1.fls"..., 98) = 98
+write(1, "main-d.tex\tspookie1.aux  spookie"..., 92) = 92
+openat(AT_FDCWD, "../test/out", O_RDONLY|O_NONBLOCK|O_CLOEXEC|O_DIRECTORY) = 3
+newfstatat(3, "", {st_mode=S_IFDIR|0755, st_size=114, ...}, AT_EMPTY_PATH) = 0
+statx(3, "", AT_STATX_SYNC_AS_STAT|AT_NO_AUTOMOUNT|AT_EMPTY_PATH, STATX_INO, {stx_mask=STATX_BASIC_STATS|STATX_MNT_ID, stx_attributes=0, stx_mode=S_IFDIR|0755, stx_size=114, ...}) = 0
+write(1, "\n", 1)                       = 1
+write(1, "../test/out:\n", 13)          = 13
+getdents64(3, 0x5e19deca5ea0 /* 7 entries */, 32768) = 216
+getdents64(3, 0x5e19deca5ea0 /* 0 entries */, 32768) = 0
+close(3)                                = 0
+write(1, "spookie3.aux  spookie3.fdb_latex"..., 76) = 76
+openat(AT_FDCWD, "../whitelist", O_RDONLY|O_NONBLOCK|O_CLOEXEC|O_DIRECTORY) = 3
+newfstatat(3, "", {st_mode=S_IFDIR|0755, st_size=48, ...}, AT_EMPTY_PATH) = 0
+statx(3, "", AT_STATX_SYNC_AS_STAT|AT_NO_AUTOMOUNT|AT_EMPTY_PATH, STATX_INO, {stx_mask=STATX_BASIC_STATS|STATX_MNT_ID, stx_attributes=0, stx_mode=S_IFDIR|0755, stx_size=48, ...}) = 0
+write(1, "\n", 1)                       = 1
+write(1, "../whitelist:\n", 14)         = 14
+getdents64(3, 0x5e19deca5e60 /* 5 entries */, 32768) = 144
+getdents64(3, 0x5e19deca5e60 /* 0 entries */, 32768) = 0
+close(3)                                = 0
+write(1, "a.out  test2.c\ttest.c\n", 22) = 22
 close(1)                                = 0
 close(2)                                = 0
 exit_group(0)                           = ?

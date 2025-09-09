@@ -1,8 +1,7 @@
 /* file_stat.c
 
    written by: Oliver Cordes 2012-07-27
-   changed by: Oliver Cordes 2025-07-02
-
+   changed by: Oliver Cordes 2025-09-09
 
 */
 
@@ -35,11 +34,8 @@ int     (*orig_open64)   (const char *filename, int flag, mode_t mode)          
 FILE*   (*orig_fopen64)  (const char *filename, const char *mode)                   = NULL;
 
 DIR*    (*orig_opendir)  (const char *name)                                         = NULL;
-
-
-
-
-
+int     (*orig_stat)    (const char *pathname, struct stat *statbuf)                = NULL;
+int     (*orig_statx)(int dirfd, const char *pathname, int flags, unsigned int mask, struct statx *statxbuf) = NULL;
 
 /* some flag rountines */
 
