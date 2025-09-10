@@ -373,7 +373,7 @@ DIR *_opendir(const char *name)
 /* overwrite stat */
 
 
-int stat(const char *pathname, struct stat *statbuf)
+int _stat(const char *pathname, struct stat *statbuf)
 {
   int result;
 
@@ -384,7 +384,7 @@ int stat(const char *pathname, struct stat *statbuf)
   return result;
 }
 
-int statx(int dirfd, const char *pathname, int flags,
+int _statx(int dirfd, const char *pathname, int flags,
           unsigned int mask, struct statx *statxbuf)
 {
   int result;

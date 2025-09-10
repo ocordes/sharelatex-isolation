@@ -21,7 +21,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 
 add_library(shareiso SHARED ${sources})
-
+target_link_libraries(shareiso dl)
 
 set_target_properties(shareiso PROPERTIES VERSION ${PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR}
                       OUTPUT_NAME shareiso)
